@@ -1,0 +1,10 @@
+ Cube#1 box 1 1 1
+Cube#2 box 2 2 2
+Donut#1 torus 1 1
+Cyl#1 cylinder 1 1
+Case#1 box 2 4 6
+Case#2 box 10.5 21 10.5
+UnitSphere sphere 1
+LargeSphere sphere 100
+Donut#2 torus 3 7
+Cyl#2 cylinder 1 2

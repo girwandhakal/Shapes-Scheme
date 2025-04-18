@@ -127,7 +127,7 @@
             (if (eof-object? line)
                 (begin (close-input-port port) (reverse lines))
                 (loop (cons (split-string line) lines))))))
-      (begin (display (string-append "Unable to open " filename " for reading.")) (newline) '())))
+      (begin (display (string-append "Unable to open " filename " for reading.")) (newline)(newline) '())))
 
 ;; ----------------- Main perform Function ------------------
 (define perform
@@ -136,7 +136,7 @@
           (filename (cadr args))
           (conditions (cddr args)))
       (if (not (or (= (length conditions) 0) (= (remainder (length conditions) 3) 0)))
-          (begin (display "Error: Invalid number of test conditions.") (newline))
+          (begin (display "Incorrect number of arguments.") (newline)(newline))
           (let* ((shapes (read-shapes filename))
                  (filtered (filter (lambda (s) (satisfy? s conditions)) shapes)))
 
@@ -150,5 +150,6 @@
                                              (cnt (length filtered)))
                                          (if (> cnt 0)
                                              (begin (display (/ sum cnt)) (newline) (/ sum cnt))
-                                             (begin (display 0) (newline) 0))))
+                                             (begin (display 0) (newline) 0)
+                                         )))
              (else (begin (display "Error: Unknown action.") (newline) 'error))))))))
