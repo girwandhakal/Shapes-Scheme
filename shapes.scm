@@ -1,4 +1,4 @@
-(define   pi     3.1415926535)
+(define   pi     3.14159265358979323846264338327950288)
 
 
 (define (roundTwoDecimals n)
@@ -40,7 +40,7 @@
      ((string=? type "cylinder")
       (* pi (expt (correctInt (caddr shape)) 2) (correctInt (cadddr shape))))
      ((string=? type "torus")
-      (* pi pi (correctInt (cadddr shape)) (expt (correctInt (caddr shape)) 2)))
+      (* 2 pi pi (expt (correctInt (caddr shape)) 2) (correctInt (cadddr shape))))
      ((string=? type "box")
       (* (correctInt (caddr shape)) (correctInt (cadddr shape)) (correctInt (car (cddddr shape)))))
      (else 0))))
@@ -126,14 +126,18 @@
       (cond
        ((string=? op "==") (equal? actual value))
        ((string=? op "!=") (not (equal? actual value)))
-       ((string=? op ">=") (>= actual value))
-       ((string=? op "<=") (<= actual value))
-       ((string=? op ">") (if (string? actual)
-                                (string>=? actual value)
-                                (> actual value)))
+       ((string=? op ">=") (if (string? actual)
+                               (string>=? actual value)
+                               (>= actual value)))
+       ((string=? op "<=") (if (string? actual)
+                               (string<=? actual value)
+                               (<= actual value)))
+       ((string=? op ">")  (if (string? actual)
+                               (string>? actual value)
+                               (> actual value)))
        ((string=? op "<")  (if (string? actual)
-                                (string<? actual value)
-                                (< actual value)))
+                               (string<? actual value)
+                               (< actual value)))
        (else #f))))
 
   (define (check conds)
@@ -151,6 +155,7 @@
                (check (cdddr conds))))))
 
   (check conditions))
+
 
 
 
